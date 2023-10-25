@@ -3,19 +3,19 @@ import Button from "./Button";
 function App(){
     return ( <div>
     <div>
-        <Button>Click me!</Button>
+        <Button purpose="primary" rounded>Click me!</Button>
     </div>
     <div>
-    <Button>Buy now!</Button>
+    <Button purpose="secondary" outline>Buy now!</Button>
     </div>
     <div>
-    <Button>Cool stuff!</Button>
+    <Button purpose="success" rounded outline>Cool stuff!</Button>
     </div>
     <div>
-    <Button>Free stuff</Button>
+    <Button purpose="warning" rounded>Free stuff</Button>
     </div>
     <div>
-    <Button>Nicee</Button>
+    <Button purpose="danger" outline>Nicee</Button>
     </div>
 </div>
     );
