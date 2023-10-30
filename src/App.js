@@ -1,27 +1,26 @@
-import Button from "./Button";
-import {GoBell, GoBookmarkFill,GoClock } from 'react-icons/go';
+import Accordion from "./components/Accordion";
 
 function App(){
-    
+    const items = [
+        {
+            id: 'lk123',
+            label:'Can I use React on a project?',
+            content: 'Of course you dummy'
+        },
+        {
+            id: '214s',
+            label:'Can I use Javascript on a project',
+            content: 'Of course you dummy'
+        },
+        {
+            id: 'jksa1',
+            label:'Can I use CSS on a project?',
+            content: 'Of course you dummy'
+        }
+    ]
 
-    return ( <div>
-    <div>
-        <Button purpose="primary" rounded className="mb-5" ><GoBell />Click me!</Button>
-    </div>
-    <div>
-    <Button purpose="secondary" outline ><GoBookmarkFill/>Buy now!</Button>
-    </div>
-    <div>
-    <Button purpose="success" rounded outline ><GoClock/>Cool stuff!</Button>
-    </div>
-    <div>
-    <Button purpose="warning" rounded>Free stuff</Button>
-    </div>
-    <div>
-    <Button purpose="danger" outline>Nicee</Button>
-    </div>
-</div>
-    );
+    return <Accordion items={items}/>;
+
 }
 
 export default App;
