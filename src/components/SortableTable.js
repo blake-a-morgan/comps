@@ -1,23 +1,10 @@
 import Table from "./Table";
-import { useState } from "react";
+import { IoMdArrowDropup, IoMdArrowDropdown } from "react-icons/io";
+import useSort from "../hooks/use-sort";
 
 function SortableTable(props) {
-    const [sortOrder, setSortOrder] = useState(null);
-    const [sortBy, setSortBy] = useState(null);
-    const {config} = props;
-
-    const handleClick = (label) => {
-        if(sortOrder === null){
-            setSortOrder('asc');
-            setSortBy(label);
-        }else if(sortOrder === 'asc'){
-            setSortOrder('desc');
-            setSortBy(label);
-        }else if(sortOrder === 'desc'){
-            setSortOrder(null);
-            setSortBy(null);
-        }
-    };
+    const {config, data} = props;
+    const {sortBy,sortOrder,sortedData,setSortColumn} = useSort(data, config);
 
     const updatedConfig = config.map((column) => {
         if(!column.sortValue){
@@ -25,14 +12,45 @@ function SortableTable(props) {
         }
         return {
             ...column,
-            header: () => <th onClick={() => handleClick(column.label)}>{column.label}IS SORTABLE</th>
+            header: () => 
+                <th className="cursor-pointer hover:bg-gray-100" onClick={() => setSortColumn(column.label)}>
+                    <div className="flex items-center">
+                    {getIcons(column.label, sortBy, sortOrder)}
+                    {column.label}
+                    </div>
+                </th>
         }
     });
 
+    
+
+    function getIcons(label, sortBy, sortOrder){
+        if(label !== sortBy){
+            return <div>
+            <IoMdArrowDropup />
+            <IoMdArrowDropdown />
+        </div>;;
+        }
+
+        if (sortOrder === null){
+            return <div>
+            <IoMdArrowDropup />
+            <IoMdArrowDropdown />
+         </div>;
+        }else if(sortOrder === 'asc'){
+            return <div>
+            <IoMdArrowDropup />
+        </div>;
+        }else if(sortOrder === 'desc'){
+            return <div>
+            <IoMdArrowDropdown />
+        </div>;
+        }
+    }
+
     return (
         <div>
-            {sortOrder} - {sortBy}
-        <Table {...props} config={updatedConfig}/>
+        <Table {...props} data={sortedData} config={updatedConfig}/>
         </div>
     )
 }
